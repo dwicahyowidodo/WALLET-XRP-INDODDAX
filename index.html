@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Wallet XRP Indodax</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body { font-family: sans-serif; background: #f5f6f9; margin: 0; padding: 0; }
+    header { background: #0057a8; color: white; padding: 20px; text-align: center; font-size: 22px; }
+    .wallet { padding: 20px; }
+    .coin { background: white; margin-bottom: 20px; padding: 16px; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .coin h2 { margin: 0 0 10px; color: #0057a8; }
+    .amount { font-size: 24px; font-weight: bold; }
+    .idr { color: #555; }
+    .btns button { margin-right: 10px; margin-top: 10px; padding: 8px 12px; background: #0057a8; color: white; border: none; border-radius: 6px; }
+    footer { text-align: center; padding: 16px; font-size: 12px; color: #aaa; }
+    .tx-history { margin-top: 30px; }
+    .tx { background: #e9f1fc; padding: 10px; margin-bottom: 6px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <header>TrustRick Wallet 🔒</header>
+
+  <div class="wallet">
+    <h3>Total Aset (Rp): <span id="totalIDR"></span></h3>
+
+    <div class="coin">
+      <h2>XRP</h2>
+      <div class="amount">20.000 XRP</div>
+      <div>≈ $<span id="xrpUSD"></span> ≈ Rp <span id="xrpIDR"></span></div>
+      <div class="btns">
+        <button onclick="copyAddress('xrp')">Copy Address</button>
+        <button onclick="sendCoin('XRP')">Kirim</button>
+        <button onclick="alert('QR Code tidak tersedia')">QR Code</button>
+      </div>
+    </div>
+
+    <div class="coin">
+      <h2>BNB</h2>
+      <div class="amount">10 BNB</div>
+      <div>≈ $<span id="bnbUSD"></span> ≈ Rp <span id="bnbIDR"></span></div>
+      <div class="btns">
+        <button onclick="copyAddress('bnb')">Copy Address</button>
+        <button onclick="sendCoin('BNB')">Kirim</button>
+        <button onclick="alert('QR Code tidak tersedia')">QR Code</button>
+      </div>
+    </div>
+
+    <div class="tx-history">
+      <h3>Riwayat Transaksi</h3>
+      <div class="tx">+ 2.000 XRP dari Binance</div>
+      <div class="tx">+ 1 BNB dari TrustSwap</div>
+      <div class="tx">- 0.5 BNB ke Tokocrypto</div>
+    </div>
+  </div>
+
+  <footer>Simulasi Wallet Palsu untuk Hiburan</footer>
+
+  <script>
+    const rateXRP = 3.11;
+    const rateBNB = 814.68;
+    const usdToIdr = 16000;
+
+    const xrpAmount = 20000;
+    const bnbAmount = 10;
+
+    const xrpUSD = xrpAmount * rateXRP;
+    const bnbUSD = bnbAmount * rateBNB;
+    const totalUSD = xrpUSD + bnbUSD;
+    const totalIDR = totalUSD * usdToIdr;
+
+    document.getElementById("xrpUSD").textContent = xrpUSD.toFixed(2);
+    document.getElementById("bnbUSD").textContent = bnbUSD.toFixed(2);
+    document.getElementById("xrpIDR").textContent = (xrpUSD * usdToIdr).toLocaleString();
+    document.getElementById("bnbIDR").textContent = (bnbUSD * usdToIdr).toLocaleString();
+    document.getElementById("totalIDR").textContent = totalIDR.toLocaleString();
+
+    function copyAddress(coin) {
+      const dummyAddress = coin === 'xrp' ? 'rXrpFakeWallet1234567890' : 'bnbFakeWallet0xABCDEF';
+      navigator.clipboard.writeText(dummyAddress).then(() => {
+        alert(`${coin.toUpperCase()} Address disalin: ${dummyAddress}`);
+      });
+    }
+
+    function sendCoin(coin) {
+      alert(`Transaksi palsu berhasil! Anda telah mengirim ${coin === 'xrp' ? '500 XRP' : '1 BNB'} ke wallet tujuan.`);
+    }
+  </script>
+</body>
+</html>
